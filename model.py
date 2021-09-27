@@ -12,14 +12,9 @@ class User(db.Model):
     username = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(20), nullable=False, unique=True)
     
-    # NOTE: a user can only have 1 reservation on a calendar date
-    # find user's appt via user1.appt or appt1.user
-    appt = db.relationship("Appointment", backref="users")
-    
-
     def __repr__(self):
         """Show user's id and email."""
-        return f"<User user_id={self.user_id} email={self.email}>"
+        return f"<User user_id={self.user_id} | username={self.username} | email={self.email}>"
 
 
 class Appointment(db.Model):
@@ -28,10 +23,16 @@ class Appointment(db.Model):
     __tablename__ = "appts"
 
     appt_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.user_id'),
+                        nullable=False)
     # reservation details; ex: time date etc 
-    datetime = datetime = db.Column(db.DateTime)
+    # ex format for entering -> Appointment(user_id=1, datetime='2022, 1, 24, 22:30:00')
+    datetime = db.Column(db.DateTime)
 
-
+    def __repr__(self):
+        """Show user's appts."""
+        return f"<Appointment: appt_id={self.appt_id} | User user_id={self.user_id} | datetime={self.datetime}>"
 
 
 def connect_to_db(app, db_uri="postgresql:///melon"):
