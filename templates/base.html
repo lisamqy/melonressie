@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TITLE HERE{% endblock %} - MelonRessie</title>
+
+    <!-- We'll load React dependencies on all pages for this app. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js" crossorigin></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+
+    <!-- GOOGLE CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap">
+    
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+</head>
+    
+<body>
+
+    <div id="page-container">
+
+        <div id="content-wrap">
+
+            <img src="/static/img/melons_pic.jpeg" alt="iamge of melons">
+
+            <!-- Include the page's content with this block. -->
+            {% block body %}
+            {% endblock %}
+
+            <!-- Include any page-specific Javascript using this block. -->
+            {% block js %}
+            {% endblock %}
+            
+        </div>
+        
+        <!-- <footer id="footer">
+            <div class="center whitesmoke">
+                © 2021 <a href="https://www.linkedin.com/in/lisa-ma77/" target="_blank">Lisa's</a> App
+            </div>
+        </footer> -->
+
+    </div>
+    
+</body>
+
+</html>

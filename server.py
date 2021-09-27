@@ -12,7 +12,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 def homepage():
     """Show homepage."""
 
-    pass
+    return render_template("homepage.html")
+
+@app.route("/new", methods=['POST'])
+def register():
+    """New user registration page."""
+
+    return render_template("register.html")   
+
+@app.route("/reservation", methods=['POST'])
+def make_reservation():
+    """User reservations."""
+
+    return render_template("reservation.html")       
 
 
 if __name__ == "__main__":
