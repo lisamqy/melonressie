@@ -3,7 +3,7 @@ function Reservation() {
       <React.Fragment>
         <h1>Create your reservation now 🍉</h1>
         
-        <form>
+        <form action="/reservation" method="POST">
           <label htmlFor="date-select">
             Date:
             <input type="date" className="date" />
@@ -16,4 +16,4 @@ function Reservation() {
     );
   }
   
-  ReactDOM.render(<Homepage />, document.getElementById('app'));
+  ReactDOM.render(<Reservation />, document.getElementById('app'));

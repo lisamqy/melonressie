@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Account{% endblock %}
+
+{% block body %}
+    <!-- React components go in here -->
+    <div id="app"></div>
+
+    {% for appt in appts %}
+        <ul>
+            <li>{{ appt }}</li>
+        </ul>
+    {% endfor %}
+
+{% endblock %}

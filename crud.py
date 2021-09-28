@@ -14,10 +14,15 @@ def create_user(username, email):
 
     return user
 
-def get_user_by_id(user_id):
+def get_user_by_id(num):   
     """Get user from database by their id."""    
     
-    return User.query.filter(user_id=user_id).one()
+    return User.query.filter_by(user_id=num).first()
+
+def get_user_by_email(email):
+    """Get a user by their email from database."""  
+
+    return User.query.filter(User.email==email).first()    
 
 def create_appt(user_id, datetime):
     """Reserves an appointment slot for a user"""

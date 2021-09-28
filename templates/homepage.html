@@ -3,10 +3,46 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-  <!-- Mount your react components on to this element. -->
-  <div id="app"></div>
+    <!-- React components go in here -->
+    <div id="app"></div>
+
+    {% if "current_user" not in session %}
+        <form action="/handle-login" method="POST">
+            <label>Username</label>
+            <input type="text" name="username" required>
+            <label>Email</label>
+            <input type="text" name="email" required>
+            
+            <input type="submit" value="Login">
+            <span id="new-user" class="form-text">
+                <a href="/new">Sign Up</a>
+            </span>
+        </form>  
+    {% endif %}
+    {% if "current_user" in session %}
+        <span>
+            Hello, {{ user.username.title() }} 
+        </span>
+        <a href="/user/{{ user.user_id }}">View Account</a>
+        <sub><i class="material-icons">account_circle</i></sub>
+        <a href="/goodbye">Logout</a>
+        <sub><i class="material-icons">logout</i></sub>
+    {% endif %}
+
+    <div>
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                    {% for message in messages %}
+                        <span class="shadow-sm p-1 bg-body bg-opacity-75 rounded">{{ message }}</span>
+                    {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+
 {% endblock %}
 
 {% block js %}
-	<script src="/static/js/homepage.jsx" type="text/jsx"></script>
+    <script src="/static/js/homepage.js" type="text/jsx"></script>
 {% endblock %}
