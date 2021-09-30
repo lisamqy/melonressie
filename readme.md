@@ -17,8 +17,10 @@ __Back End:__ Python, Flask, PostgreSQL, SQLAlchemy <br/>
 
 ## <a name="features"></a>Features
 
- -Schedule for a melon tasting
- -Track existing reservations
+<ul>
+    <li>Schedule for a melon tasting</li>
+    <li>Track existing reservations</li>
+</ul>
     ![User-Page](/static/img/user_page.png)
 
 
