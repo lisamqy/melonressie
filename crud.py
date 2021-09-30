@@ -33,17 +33,15 @@ def create_appt(user_id, datetime):
 
     return appt
 
-def show_appts():
-    """Show all appointsment in database."""
-    #prob will use to doublecheck for dupe res
+def check_appt_time(datetime):
+    """Check if appointment date&time already exists in database."""
 
-    return Appointment.query.all()
+    return Appointment.query.filter_by(datetime=datetime).count()
 
 def find_appt_by_user(user_id):
     """Find any appointment(s) associated with a specific user_id"""
 
     return Appointment.query.filter_by(user_id=user_id).all()
-
 
 
 if __name__ == '__main__':

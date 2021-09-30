@@ -3,6 +3,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -16,10 +17,9 @@ def homepage():
     
     if "current_user" in session:
         user = crud.get_user_by_id(session["current_user"])
+        return redirect(f"/user/{user.user_id}") 
     else: 
-        user = None
-
-    return render_template("homepage.html", user=user)
+        return render_template("homepage.html")
 
 @app.route("/handle-login", methods=["POST"])
 def handle_login():
@@ -50,20 +50,39 @@ def user_page(user_id):
 
     user = crud.get_user_by_id(user_id)
     appts = crud.find_appt_by_user(user_id)
+    end_times = []
 
-    return render_template("reservation.html", appts=appts)
+    #grab all found appointment times associated user
+    for dtime in appts:
+        #create datetime object from timestamp string
+        date_format_str = "%H:%M"
+        dtime = dtime.datetime.strftime("%H:%M")
+        given_time = datetime.strptime(dtime, date_format_str)
+
+        n = 30 # Add 30 minutes to datetime object
+        end_time = given_time + timedelta(minutes=n)
+        # Convert datetime object to string in specific format 
+        end_time_str = end_time.strftime('%H:%M')
+        end_times.append(end_time_str)
+
+    return render_template("reservation.html", packed=zip(appts, end_times))
 
 @app.route("/reservation", methods=['POST'])
 def make_reservation():
     """User reservations."""
 
-    user_id = crud.get_user_by_id(session["current_user"])
+    user_id = session["current_user"]
     date = request.form["date"]
     time = request.form["start-time"]
-    # print(f'\n\n{date} {time}\n\n')
-    datetime = ",".join(date.split("-")) + "," + time + ":00"
-    print(f'\n\n{datetime}\n\n')
-    crud.create_appt(user_id, datetime)
+
+    date_time = ",".join(date.split("-")) + "," + time + ":00"
+    print(f'\n\n{date_time}\n\n')
+
+    #In case users try to book a reservation at the same date and time
+    if crud.check_appt_time(date_time) < 1:
+        crud.create_appt(user_id, date_time)
+    else:
+        flash(f'Time slot taken, please try another')
 
     return redirect(f"/user/{user_id}")       
 

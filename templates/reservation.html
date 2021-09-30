@@ -7,28 +7,33 @@
   <div id="app"></div>
 
     <h1>Create your reservation now 🍉</h1>
+
+    <p>Office Hours: 10:00AM - 6:00PM Mon-Fri</p>
+    <p>Please note: reservations end half an hour after start time.</p>
             
     <form action="/reservation" method="POST">
         <label htmlFor="datetime-select">
         Date:
         <input type="date" name="date" required />
         Start Time:
-        <input type="time" name="start-time" step="1800" required  />
+        <input type="time" name="start-time" min="10:00" max="17:30" step="1800" required  />
         </label>
 
         <input type="submit" value="Submit" />
-
     </form>
 
+    <br>
+    
     <u>Reservation List</u>
-    {% for appt in appts %}
+    {% for appt,end_time in packed: %}
         <dt>
-            {{ appt.datetime.strftime('%d, %b %Y @ %H:%M') }}
+            {{ appt.datetime.strftime('%d, %b %Y @ %H:%M') }} - {{ end_time }}
         </dt>
     {% endfor %}
+    
+    <br><br>
 
-{% endblock %}
+    <a href="/goodbye">Logout</a>
+    
 
-{% block js %}
-	<!-- <script src="/static/js/reservation.jsx" type="text/jsx"></script> -->
 {% endblock %}

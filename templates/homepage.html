@@ -6,43 +6,14 @@
     <!-- React components go in here -->
     <div id="app"></div>
 
-    {% if "current_user" not in session %}
-        <form action="/handle-login" method="POST">
-            <label>Username</label>
-            <input type="text" name="username" required>
-            <label>Email</label>
-            <input type="text" name="email" required>
-            
-            <input type="submit" value="Login">
-            <span id="new-user" class="form-text">
-                <a href="/new">Sign Up</a>
-            </span>
-        </form>  
-    {% endif %}
-    {% if "current_user" in session %}
-        <p>
-            Hello, {{ user.username.title() }} 
-        </p>
-        <a href="/user/{{ user.user_id }}">View Reservations</a>
-        <sub><i class="material-icons">account_circle</i></sub>
-        <a href="/goodbye">Logout</a>
-        <sub><i class="material-icons">logout</i></sub>
-    {% endif %}
+    <form action="/handle-login" method="POST">
+        
+        <label>Username</label>
+        <input type="text" name="username" placeholder="tester1" required>
+        <label>Email</label>
+        <input type="text" name="email" placeholder="tester1@test.com" required>
+        
+        <input type="submit" value="Login">
+    </form>  
 
-    <div>
-        <!-- Flash Messages -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                    {% for message in messages %}
-                        <span>{{ message }}</span>
-                    {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </div>
-
-
-{% endblock %}
-
-{% block js %}
-    <!-- <script src="/static/js/homepage.js" type="text/jsx"></script> -->
 {% endblock %}

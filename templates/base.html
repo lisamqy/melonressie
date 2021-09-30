@@ -30,7 +30,18 @@
 
         <div id="content-wrap">
 
-            <img src="/static/img/melons_pic.jpeg" alt="iamge of melons">
+            <div id="flash-msg">
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <img src="/static/img/melons_pic.jpeg" alt="image of melons">
 
             <!-- Include the page's content with this block. -->
             {% block body %}
@@ -41,12 +52,6 @@
             {% endblock %}
             
         </div>
-        
-        <!-- <footer id="footer">
-            <div class="center whitesmoke">
-                © 2021 <a href="https://www.linkedin.com/in/lisa-ma77/" target="_blank">Lisa's</a> App
-            </div>
-        </footer> -->
 
     </div>
     

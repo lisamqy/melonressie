@@ -5,6 +5,7 @@ body {
 }
 
 img {
+    margin-top: 3em;
     width: 30em;
     border-radius: 1em;
     border-style: solid;
@@ -13,4 +14,13 @@ img {
 
 input {
     margin: .2em .5em;
+}
+
+#flash-msg {
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    position: absolute;
 }
