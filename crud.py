@@ -1,7 +1,6 @@
 """CRUD operations."""
 
-from sqlalchemy.orm import session
-from model import db, User, Appointment
+from model import db, User, Appointment, connect_to_db
 
 
 def create_user(username, email):

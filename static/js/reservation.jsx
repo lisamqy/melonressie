@@ -4,12 +4,15 @@ function Reservation() {
         <h1>Create your reservation now 🍉</h1>
         
         <form action="/reservation" method="POST">
-          <label htmlFor="date-select">
+            <label htmlFor="datetime-select">
             Date:
-            <input type="date" className="date" />
+            <input type="date" className="date" required />
             Start Time:
-            <input type="time" className="start-time" />
-          </label>
+            <input type="time" className="start-time" step="1800" required  />
+            </label>
+
+            <input type="submit" value="Submit" />
+
         </form>
   
       </React.Fragment>

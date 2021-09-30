@@ -37,12 +37,6 @@ def handle_login():
         flash("Email or password incorrect, please try again.")
         return redirect("/")
 
-@app.route("/new", methods=['POST'])
-def register():
-    """New user registration page."""
-
-    return render_template("register.html")   
-
 @app.route("/goodbye")   
 def logout():
     """Clear the session and return to homepage"""
@@ -57,15 +51,21 @@ def user_page(user_id):
     user = crud.get_user_by_id(user_id)
     appts = crud.find_appt_by_user(user_id)
 
-    return render_template("dashboard.html", appts=appts)
+    return render_template("reservation.html", appts=appts)
 
-@app.route("/user/<user_id>", methods=['POST'])
+@app.route("/reservation", methods=['POST'])
 def make_reservation():
     """User reservations."""
 
+    user_id = crud.get_user_by_id(session["current_user"])
+    date = request.form["date"]
+    time = request.form["start-time"]
+    # print(f'\n\n{date} {time}\n\n')
+    datetime = ",".join(date.split("-")) + "," + time + ":00"
+    print(f'\n\n{datetime}\n\n')
+    crud.create_appt(user_id, datetime)
 
-
-    return render_template("reservation.html")       
+    return redirect(f"/user/{user_id}")       
 
 
 if __name__ == "__main__":

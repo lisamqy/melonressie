@@ -5,8 +5,30 @@
 {% block body %}
   <!-- Mount your react components on to this element. -->
   <div id="app"></div>
+
+    <h1>Create your reservation now 🍉</h1>
+            
+    <form action="/reservation" method="POST">
+        <label htmlFor="datetime-select">
+        Date:
+        <input type="date" name="date" required />
+        Start Time:
+        <input type="time" name="start-time" step="1800" required  />
+        </label>
+
+        <input type="submit" value="Submit" />
+
+    </form>
+
+    <u>Reservation List</u>
+    {% for appt in appts %}
+        <dt>
+            {{ appt.datetime.strftime('%d, %b %Y @ %H:%M') }}
+        </dt>
+    {% endfor %}
+
 {% endblock %}
 
 {% block js %}
-	<script src="/static/js/reservation.jsx" type="text/jsx"></script>
+	<!-- <script src="/static/js/reservation.jsx" type="text/jsx"></script> -->
 {% endblock %}

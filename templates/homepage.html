@@ -20,10 +20,10 @@
         </form>  
     {% endif %}
     {% if "current_user" in session %}
-        <span>
+        <p>
             Hello, {{ user.username.title() }} 
-        </span>
-        <a href="/user/{{ user.user_id }}">View Account</a>
+        </p>
+        <a href="/user/{{ user.user_id }}">View Reservations</a>
         <sub><i class="material-icons">account_circle</i></sub>
         <a href="/goodbye">Logout</a>
         <sub><i class="material-icons">logout</i></sub>
@@ -34,15 +34,15 @@
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                     {% for message in messages %}
-                        <span class="shadow-sm p-1 bg-body bg-opacity-75 rounded">{{ message }}</span>
+                        <span>{{ message }}</span>
                     {% endfor %}
             {% endif %}
         {% endwith %}
     </div>
-    
+
 
 {% endblock %}
 
 {% block js %}
-    <script src="/static/js/homepage.js" type="text/jsx"></script>
+    <!-- <script src="/static/js/homepage.js" type="text/jsx"></script> -->
 {% endblock %}
